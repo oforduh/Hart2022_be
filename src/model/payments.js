@@ -32,6 +32,7 @@ const schema = new mongoose.Schema(
     },
     amount: {
       type: String,
+      required: true,
     },
 
     // Role

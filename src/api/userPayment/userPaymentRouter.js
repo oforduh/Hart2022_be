@@ -3,6 +3,6 @@ const router = new express.Router();
 
 import { handleUserPayment } from "./userPaymentController.js";
 
-router.post("/register", handleUserPayment);
+router.post("/initialize/payment", handleUserPayment);
 
 export default router;
