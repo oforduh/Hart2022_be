@@ -29,7 +29,7 @@ export const handleUserPayment = async (req, res) => {
     const obj = { email, amount, fName, lName, message };
     const { initializePayment } = paystack(obj);
     const { data } = await initializePayment(obj);
-    const user = await userModel({ email, amount, fName, lName });
+    const user = await userModel({ email, amount, fName, lName, message });
     user.transactionReference = data.reference;
     await user.save();
     responses.success({
@@ -37,6 +37,7 @@ export const handleUserPayment = async (req, res) => {
       data,
     });
   } catch (error) {
+    console.log(error);
     const msg = `Could not save user credentials`;
     handleError({ error, responses, res, msg });
   }
