@@ -30,7 +30,6 @@ export const handleUserPayment = async (req, res) => {
     const { initializePayment } = paystack(obj);
     const { data } = await initializePayment(obj);
     const user = await userModel({ email, amount, fName, lName, message });
-    user.transactionReference = data.reference;
     await user.save();
     responses.success({
       res,

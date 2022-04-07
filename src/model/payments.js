@@ -19,8 +19,8 @@ const schema = new mongoose.Schema(
     email: {
       type: String,
       lowercase: true,
+      required: true,
       trim: true,
-
       // validate is inbuilt while validator is a package
       validate(value) {
         if (!validator.isEmail(value)) {
