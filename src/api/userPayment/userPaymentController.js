@@ -8,12 +8,43 @@ import { paystack } from "../../helper/payStack.js";
 // https://paystack.com/docs/api/#transaction
 
 // https://paystack.zendesk.com/hc/en-us/articles/360013787840-How-do-I-switch-from-a-Registered-business-to-a-Starter-Business-
+
 export const handleUserPayment = async (req, res) => {
   let { email, amount, fName, lName } = req.body;
+
+  // amount validation
+  // check for alphabet,spaces and ay kind of digit or symbol
+  const amountAlpha = amount.match(/[a-zA-Z]/g);
+  const amountSpace = amount.match(/\s/g);
+  const amountDigit = amount.match(/\D/g);
+
+  if (!amount || amountAlpha || amountDigit || amountSpace)
+    return responses.bad_request({
+      res,
+      message: "The amount should only be a number",
+    });
+
   if (amount) amount = parseInt(amount) * 100;
   try {
     const obj = { email, amount, fName, lName };
     const { initializePayment, verifyPayment } = paystack(obj);
+    const { data } = await initializePayment(obj);
+    const user = await userModel({ email, amount, fName, lName });
+    user.transactionReference = data.reference;
+    await user.save();
+    responses.success({
+      res,
+      data,
+    });
+  } catch (error) {
+    const msg = `Could not save user credentials`;
+    handleError({ error, responses, res, msg });
+  }
+};
+
+export const verifyPayment = async (req, res) => {
+  try {
+    const { verifyPayment } = paystack(obj);
     const data = await initializePayment(obj);
     console.log(data);
     const ref = data.reference;

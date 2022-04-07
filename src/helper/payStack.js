@@ -21,7 +21,6 @@ export const paystack = (obj) => {
     const url = `${host}${path}`;
     const config = {
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.MySecretKey}`,
       },
     };
