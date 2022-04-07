@@ -10,7 +10,7 @@ import { paystack } from "../../helper/payStack.js";
 // https://paystack.zendesk.com/hc/en-us/articles/360013787840-How-do-I-switch-from-a-Registered-business-to-a-Starter-Business-
 
 export const handleUserPayment = async (req, res) => {
-  let { email, amount, fName, lName } = req.body;
+  let { email, amount, fName, lName, message } = req.body;
 
   // amount validation
   // check for alphabet,spaces and ay kind of digit or symbol
@@ -26,8 +26,8 @@ export const handleUserPayment = async (req, res) => {
 
   if (amount) amount = parseInt(amount) * 100;
   try {
-    const obj = { email, amount, fName, lName };
-    const { initializePayment, verifyPayment } = paystack(obj);
+    const obj = { email, amount, fName, lName, message };
+    const { initializePayment } = paystack(obj);
     const { data } = await initializePayment(obj);
     const user = await userModel({ email, amount, fName, lName });
     user.transactionReference = data.reference;
