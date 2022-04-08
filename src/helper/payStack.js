@@ -24,8 +24,8 @@ export const paystack = (obj) => {
         Authorization: `Bearer ${process.env.MySecretKey}`,
       },
     };
-    const { data } = await axios.get(url, obj, config);
-    return data;
+    const response = await axios.get(url, config);
+    return response;
   };
   return { initializePayment, verifyPayment };
 };

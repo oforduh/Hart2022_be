@@ -43,41 +43,22 @@ export const handleUserPayment = async (req, res) => {
 };
 
 export const verifyPayment = async (req, res) => {
+  let { reference } = req.query;
   try {
-    const { verifyPayment } = paystack(obj);
-    const data = await initializePayment(obj);
-    console.log(data);
-    const ref = data.reference;
-
-    const verifyPaymentData = await verifyPayment(ref);
-    if (verifyPaymentData.status) {
-      console.log(verifyPaymentData.gateway_response);
+    const { verifyPayment } = paystack(reference);
+    const verifyPaymentResponse = await verifyPayment(reference);
+    const response = verifyPaymentResponse.data.data;
+    if (response.status !== "success") {
+      const message = response.gateway_response;
+      return responses.bad_request({ res, message });
     }
-    // Send a POST request
-    // const host = `https://api.paystack.co`;
-    // const path = `/transaction/initialize`;
-    // const url = `${host}${path}`;
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${process.env.MySecretKey}`,
-    //   },
-    // };
+    const message = response.gateway_response;
 
-    // const { data } = await axios.post(url, obj, config);
-    return;
-    responses.success({
+    return responses.success({
       res,
-      data,
+      data: response,
+      message,
     });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const handleUserPayment2 = async (_, res) => {
-  try {
-    res.status(200).json({ msg: "This end point is working" });
   } catch (error) {
     console.log(error);
   }
