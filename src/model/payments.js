@@ -35,11 +35,6 @@ const schema = new mongoose.Schema(
     message: {
       type: String,
     },
-
-    // Role
-    transactionReference: {
-      type: String,
-    },
   },
   { timestamps: true }
 );

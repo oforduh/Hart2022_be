@@ -74,3 +74,11 @@ export const verifyPayment = async (req, res) => {
     console.log(error);
   }
 };
+
+export const handleUserPayment2 = async (_, res) => {
+  try {
+    res.status(200).json({ msg: "This end point is working" });
+  } catch (error) {
+    console.log(error);
+  }
+};
