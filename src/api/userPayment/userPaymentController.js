@@ -3,6 +3,7 @@ import responses from "../../helper/responses.js";
 import { handleError } from "../../helper/errorHandler.js";
 import axios from "axios";
 import { paystack } from "../../helper/payStack.js";
+import { sendGoodwillMessage, sendThankUMail } from "../../Email/SendGrid.js";
 
 // Paystack docs
 // https://paystack.com/docs/api/#transaction
@@ -27,16 +28,28 @@ export const handleUserPayment = async (req, res) => {
   if (amount) amount = parseInt(amount) * 100;
   try {
     const obj = { email, amount, fName, lName, message };
+
+    // Destructuring initializePayment function and destructure data object from the response
+
     const { initializePayment } = paystack(obj);
     const { data } = await initializePayment(obj);
+
+    // save user
     const user = await userModel({ email, amount, fName, lName, message });
+    user.reference = data.reference;
+
+    // send the user message to my personal email
+    let fullName = `${user.fName} ${user.lName}`;
+    let userEmail = user.email;
+    let userMessage = user.message;
+
+    sendGoodwillMessage(fullName, userMessage);
     await user.save();
     responses.success({
       res,
       data,
     });
   } catch (error) {
-    console.log(error);
     const msg = `Could not save user credentials`;
     handleError({ error, responses, res, msg });
   }
@@ -45,13 +58,24 @@ export const handleUserPayment = async (req, res) => {
 export const verifyPayment = async (req, res) => {
   let { reference } = req.query;
   try {
+    // Destructuring verifyPayment function
     const { verifyPayment } = paystack(reference);
     const verifyPaymentResponse = await verifyPayment(reference);
     const response = verifyPaymentResponse.data.data;
+
+    // do this for failed transaction
     if (response.status !== "success") {
       const message = response.gateway_response;
       return responses.bad_request({ res, message });
     }
+
+    // do this for successful transaction
+    const user = await userModel.findOne({ reference });
+    let fullName = `${user.fName} ${user.lName}`;
+    let email = user.email;
+
+    // send a thank you mail
+    sendThankUMail(email, fullName);
     const message = response.gateway_response;
 
     return responses.success({

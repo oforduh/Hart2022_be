@@ -35,6 +35,9 @@ const schema = new mongoose.Schema(
     message: {
       type: String,
     },
+    reference: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

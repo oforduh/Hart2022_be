@@ -2,8 +2,6 @@ import axios from "axios";
 
 const host = `https://api.paystack.co`;
 export const paystack = (obj) => {
-  const MySecretKey = `Bearer ${process.env.MySecretKey}`;
-
   const initializePayment = async (obj) => {
     const path = `/transaction/initialize`;
     const url = `${host}${path}`;
@@ -13,8 +11,12 @@ export const paystack = (obj) => {
         Authorization: `Bearer ${process.env.MySecretKey}`,
       },
     };
-    const { data } = await axios.post(url, obj, config);
-    return data;
+    try {
+      const { data } = await axios.post(url, obj, config);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   };
   const verifyPayment = async (obj) => {
     const path = `/transaction/verify/${obj}`;
