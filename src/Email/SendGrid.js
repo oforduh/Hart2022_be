@@ -48,7 +48,7 @@ export const sendThankUMail = async (email, name) => {
 };
 
 export const sendGoodwillMessage = async (name, goodwillMessage) => {
-  console.log(SENDGRID_API_KEY, SENDER_EMAIL, SENDER_NAME);
+  //   console.log(SENDGRID_API_KEY, SENDER_EMAIL, SENDER_NAME);
   const msg = {
     to: SENDER_EMAIL,
     from: {
