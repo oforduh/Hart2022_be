@@ -8,11 +8,10 @@ const SENDER_NAME = process.env.SENDER_NAME;
 const FROM_NAME = process.env.FROM_NAME;
 sgMail.setApiKey(SENDGRID_API_KEY);
 
-console.log(SENDGRID_API_KEY, SENDER_EMAIL, SENDER_NAME);
-
 // https://app.sendgrid.com/guide/integrate
 // https://github.com/sendgrid/sendgrid-nodejs/blob/main/docs/use-cases/README.md#email-use-cases
 export const sendThankUMail = async (email, name) => {
+  console.log(SENDGRID_API_KEY, SENDER_EMAIL, SENDER_NAME);
   const msg = {
     to: email,
     from: {
@@ -48,6 +47,7 @@ export const sendThankUMail = async (email, name) => {
 };
 
 export const sendGoodwillMessage = async (name, goodwillMessage) => {
+  console.log(SENDGRID_API_KEY, SENDER_EMAIL, SENDER_NAME);
   const msg = {
     to: SENDER_EMAIL,
     from: {
