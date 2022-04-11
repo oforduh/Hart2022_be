@@ -13,6 +13,7 @@ import { sendGoodwillMessage, sendThankUMail } from "../../Email/SendGrid.js";
 export const handleUserPayment = async (req, res) => {
   let { email, amount, fName, lName, message } = req.body;
 
+  console.log({ email, amount, fName, lName, message });
   // amount validation
   // check for alphabet,spaces and ay kind of digit or symbol
   const amountAlpha = amount.match(/[a-zA-Z]/g);
