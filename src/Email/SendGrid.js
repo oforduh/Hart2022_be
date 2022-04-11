@@ -30,6 +30,7 @@ export const sendThankUMail = async (email, name) => {
     })
     .catch((error) => {
       console.error(error);
+      console.log(JSON.stringify(error));
     });
 
   //   ES8
@@ -64,5 +65,6 @@ export const sendGoodwillMessage = async (name, goodwillMessage) => {
     })
     .catch((error) => {
       console.error(error);
+      console.log(JSON.stringify(error));
     });
 };
