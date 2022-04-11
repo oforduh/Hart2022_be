@@ -506,8 +506,7 @@ export const html = (name, senderEmail, senderName) => {
                                                                   deserve more than
                                                                   just a thank you.
                                                                   Just like you!
-                                                                  Thanks for your
-                                                                  gift</span
+                                                               </span
                                                                 ><span
                                                                   style="
                                                                     color: #000000;
@@ -609,12 +608,7 @@ export const html = (name, senderEmail, senderName) => {
                                                                     color: #f2bf69;
                                                                     font-size: 18px;
                                                                   "
-                                                                  >Your love and
-                                                                  support mean more
-                                                                  than you will ever
-                                                                  know. Thank you
-                                                                  for the
-                                                                  Gift.</span
+                                                                  >We’re beyond grateful for your abundant generosity and kindness.</span
                                                                 >
                                                               </div>
                                                               <div
@@ -636,31 +630,7 @@ export const html = (name, senderEmail, senderName) => {
                                                                     color: #f2bf69;
                                                                     font-size: 18px;
                                                                   "
-                                                                  >Gratitude is
-                                                                  something that
-                                                                  cannot easily be
-                                                                  expressed with
-                                                                  words. However,
-                                                                  this message comes
-                                                                  close to
-                                                                  portraying the
-                                                                  true feeling of
-                                                                  gratitude.</span> 
-                                                              </div>
-    
-                                                              <div
-                                                                style="
-                                                                  font-family: inherit;
-                                                                  text-align: center;
-                                                                "
-                                                              >
-                                                                <!-- <span
-                                                                  style="
-                                                                    color: #f2bf69;
-                                                                    font-size: 18px;
-                                                                  "
-                                                                  ></span -->
-                                                                >
+                                                                  >With love from, <br/>The Ofordu's</span> 
                                                               </div>
                                                               <div
                                                                 style="
