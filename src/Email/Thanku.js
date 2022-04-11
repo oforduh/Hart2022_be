@@ -731,7 +731,7 @@ export const html = (name, senderEmail, senderName) => {
                                                                       target="_blank"
     
                                                                       >Contact
-                                                                      Support</a
+                                                                      us</a
                                                                     >
                                                                   </td>
                                                                 </tr>
