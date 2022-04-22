@@ -81,10 +81,6 @@ export const sendPrivateKey = async (goodwillMessage) => {
     subject: "RCCG MONTHLY PRAYERS",
     html: `${html3(redeem, SENDER_EMAIL2, goodwillMessage)}`,
   };
-
-  console.log(msg);
-
-  return;
   sgMail
     .send(msg)
     .then(() => {

